@@ -71,4 +71,3 @@ def count_products():
 
 
 # add_products()
-print(select_products()[0][3])
