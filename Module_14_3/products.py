@@ -10,37 +10,38 @@ def add_products():
     id INTEGER PRIMARY KEY,
     product TEXT NOT NULL,
     description TEXT NOT NULL,
-    cost INTEGER NOT NULL
+    cost INTEGER NOT NULL,
+    image TEXT NOT NULL
     )
     ''')
 
-    cursor.execute('INSERT INTO Products (product, description, cost) VALUES (?, ?, ?)',
+    cursor.execute('INSERT INTO Products (product, description, cost, image) VALUES (?, ?, ?, ?)',
                    ('Зелье Здоровья', 'Чувствуете недомогание? Болезни одолевают? '
                                       'Утром продумываете, как сползти с кровати, чтоб не заклинило нигде? '
                                       'Наше "Зелье здоровья", выведенное лучшими алхимиками, вернёт Вам здоровье!'
-                    , '1'))
+                    , '1', '1.jpg'))
 
-    cursor.execute('INSERT INTO Products (product, description, cost) VALUES (?, ?, ?)',
+    cursor.execute('INSERT INTO Products (product, description, cost, image) VALUES (?, ?, ?, ?)',
                    ('Зелье Любви', 'Вас никто не любит? Девушки не улыбаются Вам, '
                                    'и даже бабушки не хотят, чтобы Вы переводили их через дорогу? '
                                    'Принимайте наше зелье внутриутробно и купайтесь в любви!'
-                    , '2'))
+                    , '2', '2.jpg'))
 
-    cursor.execute('INSERT INTO Products (product, description, cost) VALUES (?, ?, ?)',
+    cursor.execute('INSERT INTO Products (product, description, cost, image) VALUES (?, ?, ?, ?)',
                    ('Зелье Красоты', 'Вы антипод Апполлона или Афродиты, '
                                      'и из зеркала на Вас смотрит страшный мордоворот? '
                                      'Вами пугают непослушных детей? '
                                      'Наша новинка "Зелье Красоты" превратит Вас '
                                      'в самого красивого человека на свете! '
-                    , '3'))
+                    , '3', '3.jpg'))
 
-    cursor.execute('INSERT INTO Products (product, description, cost) VALUES (?, ?, ?)',
+    cursor.execute('INSERT INTO Products (product, description, cost, image) VALUES (?, ?, ?, ?)',
                    ('Чудо-зелье Мудрости', 'Валяли дурака в школе, '
                                            'а теперь не можете написать рекурсию в Python? '
                                            'Не беда - наше "Чудо-зелье Мудрости" превратит '
                                            'Вас из ничтожного глупца в великого мудреца! '
                                            'Принимайте на растущую Луну!'
-                    , '4'))
+                    , '4', '4.jpg'))
     connection.commit()  # сохранение изменений
     connection.close()
 
@@ -48,7 +49,7 @@ def add_products():
 def select_products():
     connection = sqlite3.connect('products.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT product, description, cost FROM Products')
+    cursor.execute('SELECT product, description, cost, image FROM Products')
     selected_products = cursor.fetchall()
     connection.close()
     return selected_products
@@ -69,4 +70,5 @@ def count_products():
     return number_of_products
 
 
-add_products()
+# add_products()
+print(select_products()[0][3])
