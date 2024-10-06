@@ -6,7 +6,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMar
 import asyncio
 import products
 
-api = ''
+api = '7814474290:AAFeubVgULK4g1etd7sBvHyfqq5ML-R3SrE'
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
@@ -61,14 +61,16 @@ async def main_menu(message):
 @dp.message_handler(text='Купить')
 async def get_buying_list(message):
     for i in range(products.count_products()):
-        with open(f'{i+1}.jpg', 'rb') as img:
+        with open(products.select_products()[i][3], 'rb') as img:
             await message.answer_photo(img, products.about_product(i))
     await message.answer(text='Выберите продукт для покупки:', reply_markup=buy_menu)
+
 
 @dp.callback_query_handler(text='product_buying')
 async def send_confirm_message(call):
     await call.message.answer('Вы успешно приобрели продукт!')
     await call.answer()
+
 
 # @dp.message_handler(text='Рассчитать')
 @dp.callback_query_handler(text='calories')
@@ -135,4 +137,3 @@ async def send_calories(message, state):
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
-
