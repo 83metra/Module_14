@@ -1,6 +1,6 @@
 import sqlite3
 
-filename = 'products_14_4.db'
+filename = 'products_14_5.db'
 def initiate_db():
     connection = sqlite3.connect(filename)
     cursor = connection.cursor()
