@@ -107,5 +107,4 @@ def count_products():
     return number_of_products
 
 # initiate_db()
-# add_user(234,12,234)
-# print(is_included('Adfhj'))
+
